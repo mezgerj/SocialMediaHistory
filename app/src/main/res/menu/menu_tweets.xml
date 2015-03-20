@@ -2,8 +2,22 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="bignerdranch.socialmediahistory.TweetsActivity">
-    <item android:id="@+id/action_change_date"
-          android:title="@string/action_change_date"
-          android:orderInCategory="100"
-          app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/action_prev_day"
+        android:icon="@android:drawable/ic_media_previous"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="1"
+        android:title=""/>
+    <item
+        android:id="@+id/action_change_date"
+        android:title="@string/action_change_date"
+        android:orderInCategory="2"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        app:showAsAction="ifRoom|withText"/>
+    <item
+        android:id="@+id/action_next_day"
+        android:icon="@android:drawable/ic_media_next"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="3"
+        android:title=""/>
 </menu>

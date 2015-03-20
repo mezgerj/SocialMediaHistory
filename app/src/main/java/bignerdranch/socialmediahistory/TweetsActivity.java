@@ -38,7 +38,7 @@ public class TweetsActivity extends ActionBarActivity {
     private String mUserName;
     private StatusesService statusesService;
     private Toast mToast;
-    private Boolean tweetsFound=false;
+    private Boolean tweetsFound = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,6 @@ public class TweetsActivity extends ActionBarActivity {
         mDateWanted = Calendar.getInstance();
         mUserName = getIntent().getStringExtra(USERNAME);
         getSupportActionBar().setTitle("@" + mUserName + "'s tweets");
-
 
         updateDate(2015, 2, 9);
     }
@@ -90,7 +89,7 @@ public class TweetsActivity extends ActionBarActivity {
     private void goThroughTweets(Result<List<Tweet>> listResult) {
         if (listResult.data.size() > 0) {
             if (mToast != null) mToast.cancel();
-            mToast=Toast.makeText(TweetsActivity.this, R.string.loading_toast, Toast.LENGTH_SHORT);
+            mToast = Toast.makeText(TweetsActivity.this, R.string.loading_toast, Toast.LENGTH_SHORT);
             mToast.show();
 
             mLastId = listResult.data.get(listResult.data.size() - 1).id;
@@ -99,11 +98,12 @@ public class TweetsActivity extends ActionBarActivity {
                 try {
                     mCalendar.setTime(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US).parse(tweet.createdAt));
                     if (mCalendar.get(Calendar.YEAR) == mDateWanted.get(Calendar.YEAR) && mCalendar.get(Calendar.MONTH) == mDateWanted.get(Calendar.MONTH) && mCalendar.get(Calendar.DAY_OF_MONTH) == mDateWanted.get(Calendar.DAY_OF_MONTH)) {
-                        tweetsFound=true;
+                        tweetsFound = true;
                         TweetUtils.loadTweet(tweet.id, new LoadCallback<Tweet>() {
                             @Override
                             public void success(Tweet tweet) {
                                 mLinearLayout.addView(new TweetView(TweetsActivity.this, tweet));
+                                mLinearLayout.getChildAt(mLinearLayout.getChildCount()-1).setPadding(0,0,0,10);
                             }
 
                             @Override
@@ -114,7 +114,7 @@ public class TweetsActivity extends ActionBarActivity {
                     } else if (mCalendar.getTime().before(mDateWanted.getTime())) {
                         if (mToast != null) mToast.cancel();
                         if (!tweetsFound) {
-                            mToast=Toast.makeText(TweetsActivity.this, R.string.no_tweets_toast, Toast.LENGTH_LONG);
+                            mToast = Toast.makeText(TweetsActivity.this, R.string.no_tweets_toast, Toast.LENGTH_LONG);
                             mToast.show();
                         }
                         break;
@@ -134,7 +134,7 @@ public class TweetsActivity extends ActionBarActivity {
         mLinearLayout.removeAllViews();
         mDateWanted.set(year, month, day);
         getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
-        tweetsFound=false;
+        tweetsFound = false;
         loadTweetsFirstTime();
     }
 
@@ -157,8 +157,17 @@ public class TweetsActivity extends ActionBarActivity {
                 DialogFragment dialogFragment = new DatePickerFragment();
                 dialogFragment.setArguments(args);
                 dialogFragment.show(getFragmentManager(), "datePicker");
+                break;
+            case R.id.action_prev_day:
+                mDateWanted.add(Calendar.DAY_OF_MONTH,-1);
+                updateDate(mDateWanted.get(Calendar.YEAR),mDateWanted.get(Calendar.MONTH),mDateWanted.get(Calendar.DAY_OF_MONTH));
+                break;
+            case R.id.action_next_day:
+                mDateWanted.add(Calendar.DAY_OF_MONTH,1);
+                updateDate(mDateWanted.get(Calendar.YEAR),mDateWanted.get(Calendar.MONTH),mDateWanted.get(Calendar.DAY_OF_MONTH));
+                break;
             default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 }

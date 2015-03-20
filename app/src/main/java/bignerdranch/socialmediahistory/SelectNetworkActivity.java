@@ -48,27 +48,17 @@ public class SelectNetworkActivity extends ActionBarActivity {
             }
         });
 
-//        mTwitterButton = (Button) findViewById(R.id.twitter_button);
-//        mTwitterButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(v.getContext(), messageResIdTwitter, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         checkIfLoggedIn();
 
         mLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
         mLoginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
-                // Do something with result, which provides a TwitterSession for making API calls
                 showTweets(result);
             }
 
             @Override
             public void failure(TwitterException exception) {
-                // Do something on failure
                 Toast.makeText(SelectNetworkActivity.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
             }
         });
