@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SocialMediaHistory</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="facebook_login_toast">Launching Facebook login...</string>
+    <string name="twitter_login_toast">Launching Twitter login...</string>
+    <string name="title_activity_tweets">TweetsActivity</string>
+    <string name="action_change_date">Change date</string>
+    <string name="login_toast">"You're now logged in!"</string>
+    <string name="loading_toast">Loading tweets...</string>
+    <string name="no_tweets_toast">No tweets found.</string>
+</resources>

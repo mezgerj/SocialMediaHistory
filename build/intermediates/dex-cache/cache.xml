@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter/1.3.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b556bb43b1b781e5a3f6d164ed8acf86793998be">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-4e23500d8a4aa02fb27dc9979e9009ca6b56b8b3.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.twitter.cobalt/performance-metrics/0.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="39a316349636281051561b9abb23fdd6a2b17061">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-6e925ccc027b4d22917e541bf14529e0e44ceb4b.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.3.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b6d78e6b220579f1e542dc86e217bca45dd573cd">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-7ce056a797a9e0a069b35a58ed2529dce488f561.jar" />
+    </item>
+    <item
+        jar="/Users/umang/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit/retrofit/1.6.1/efb0a36546aa8857ab8df358b106c1817e03cbee/retrofit-1.6.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="efb0a36546aa8857ab8df358b106c1817e03cbee">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/retrofit-1.6.1-3d6f1e4ff34d5461c356731911ec2b44f1f1fcbe.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-composer/0.7.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="69bf5d59b95eb91b9d17ddb3f0725a4ff499197e">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-a4d6ba2af1e1fe18976ff96680aa98561db4bbf7.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-composer/0.7.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="69bf5d59b95eb91b9d17ddb3f0725a4ff499197e">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-1cf3bcd4f9c1f33d5a7b32544e5d55f5a2695c01.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-47c6bc9b936f94d866d157d4df9eb6864fce3fa7.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-637b3e9708b31e59c9e0891ac2c14fa0573a8da0.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.digits.sdk.android/digits/1.3.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b6d78e6b220579f1e542dc86e217bca45dd573cd">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-5bb1f08e7fcd20aac7def4fec8dea2e0cfd2be61.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.0.7/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9590fac4b366ffac8877cf5ba7daa3bd58cd5661">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-fdb3bc5103fd4fbba40750c4ed4e3786233d9eaa.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-722da292755c92eed1487d89cd93884e5d6be5dc.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter/1.3.2/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b556bb43b1b781e5a3f6d164ed8acf86793998be">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-37fe50785021180cbbf74cb3f422b90689469b8f.jar" />
+    </item>
+    <item
+        jar="/Users/umang/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/gson-2.2.4-331e5e9d9be7f9c50beb5bc383d29cb5f854a140.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.3.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4258a821d937d5064491b0a1e57fc4228d93b7be">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-2edbc5864235ccdc1f0fa7ca3f96553bc1fee630.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-12261d668a929a99eb51eb0a399f4db1c4c36395.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0a4af6a85230b990eb8690b696d2db9247338611">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-677cf3c1896b34bf11c62696225917f095c6dd56.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-b28d8d10a52fbae7d8d5fd47ea993416cf61206c.jar" />
+    </item>
+    <item
+        jar="/Users/umang/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-9d5a2cea49ad2d54b049517f74b041bd6ccfffb7.jar" />
+    </item>
+    <item
+        jar="/Users/umang/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.3.2/d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27/picasso-2.3.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/picasso-2.3.2-0d820f5f6d0752dc165f18593c8fee1e0c45dbca.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-d316f84395314d3f91c19c53d20a99698da35f5b.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.twitter.sdk.android/twitter-core/1.3.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4258a821d937d5064491b0a1e57fc4228d93b7be">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-74900e7b88e0c1759440593d064697b61219a8e5.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.twitter.sdk.android/tweet-ui/1.0.7/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9590fac4b366ffac8877cf5ba7daa3bd58cd5661">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-ff72ea93a9ef8b9fe92740daafacfae6805e2f05.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/io.fabric.sdk.android/fabric/1.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0a4af6a85230b990eb8690b696d2db9247338611">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-07797524916387720e89ef8f20187a583d889532.jar" />
+    </item>
+    <item
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/exploded-aar/com.twitter.cobalt/performance-metrics/0.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="39a316349636281051561b9abb23fdd6a2b17061">
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory2/app/build/intermediates/pre-dexed/debug/classes-9b054bb3c4d6b822dc37d0886df8c713775f68a1.jar" />
+    </item>
+
+</items>
