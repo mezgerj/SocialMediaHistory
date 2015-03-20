@@ -1,6 +1,8 @@
 package bignerdranch.socialmediahistory;
 
 import android.app.DialogFragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -53,6 +55,7 @@ public class TweetsActivity extends ActionBarActivity {
         mDateWanted = Calendar.getInstance();
         mUserName = getIntent().getStringExtra(USERNAME);
         getSupportActionBar().setTitle("@" + mUserName + "'s tweets");
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4099FF")));
 
         updateDate(2015, 2, 9);
     }
@@ -159,7 +162,7 @@ public class TweetsActivity extends ActionBarActivity {
                 dialogFragment.show(getFragmentManager(), "datePicker");
                 break;
             case R.id.action_prev_day:
-                mDateWanted.add(Calendar.DAY_OF_MONTH,-1);
+                mDateWanted.add(Calendar.DAY_OF_MONTH, -1);
                 updateDate(mDateWanted.get(Calendar.YEAR),mDateWanted.get(Calendar.MONTH),mDateWanted.get(Calendar.DAY_OF_MONTH));
                 break;
             case R.id.action_next_day:
