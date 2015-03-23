@@ -29,6 +29,8 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
     private static final String TAG = "SocialMediaHistory";
     private Button mFacebookButton;
+    private Button mShowTweetsButton;
+    private Button mLogoutTwitterButton;
 
     private TwitterLoginButton mLoginButton;
 
@@ -40,7 +42,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
         setContentView(R.layout.activity_select_network);
         Log.d(TAG, "onCreate() called");
 
-        ((TextView)findViewById(R.id.link_credit_icons)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView) findViewById(R.id.link_credit_icons)).setMovementMethod(LinkMovementMethod.getInstance());
 
         final int messageResIdFacebook = R.string.facebook_login_toast;
 
@@ -52,32 +54,51 @@ public class SelectNetworkActivity extends ActionBarActivity {
             }
         });
 
-        //comment out the next line to avoid switching automatically to TweetsActivity
-        checkIfLoggedIn();
-
+        final TwitterSession twitterSession = Twitter.getSessionManager().getActiveSession();
         mLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
-        mLoginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                showTweets(result);
-            }
 
-            @Override
-            public void failure(TwitterException exception) {
-                Toast.makeText(SelectNetworkActivity.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void checkIfLoggedIn() {
-        TwitterSession twitterSession = Twitter.getSessionManager().getActiveSession();
         if (twitterSession != null) {
-            showTweets(new Result<>(twitterSession,null));
+            mLoginButton.setVisibility(View.GONE);
+
+            mShowTweetsButton = (Button) findViewById(R.id.show_tweets_button);
+            mShowTweetsButton.setVisibility(View.VISIBLE);
+            mShowTweetsButton.setText("Show " + twitterSession.getUserName() + "'s tweets");
+            mShowTweetsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showTweets(new Result<>(twitterSession, null));
+                }
+            });
+
+            mLogoutTwitterButton = (Button) findViewById(R.id.logout_twitter);
+            mLogoutTwitterButton.setVisibility(View.VISIBLE);
+            mLogoutTwitterButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Twitter.logOut();
+                    mLoginButton.setVisibility(View.VISIBLE);
+                    mLogoutTwitterButton.setVisibility(View.GONE);
+                    mShowTweetsButton.setVisibility(View.GONE);
+                    Toast.makeText(SelectNetworkActivity.this, R.string.logout_toast, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            mLoginButton.setCallback(new Callback<TwitterSession>() {
+                @Override
+                public void success(Result<TwitterSession> result) {
+                    Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
+                    showTweets(result);
+                }
+
+                @Override
+                public void failure(TwitterException exception) {
+                    Toast.makeText(SelectNetworkActivity.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
     private void showTweets(Result<TwitterSession> result) {
-        Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(SelectNetworkActivity.this, TweetsActivity.class);
         i.putExtra(TweetsActivity.USERNAME, result.data.getUserName());
         startActivity(i);

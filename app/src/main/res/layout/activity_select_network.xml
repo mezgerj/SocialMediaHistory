@@ -28,11 +28,25 @@
             android:text="Facebook"
             android:id="@+id/facebook_button"/>
 
-        <!--<Button-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Twitter"-->
-        <!--android:id="@+id/twitter_button"/>-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_tweets_button"
+                android:id="@+id/show_tweets_button"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/logout_twitter"
+                android:text="@string/logout_twitter"
+                android:visibility="gone"/>
+        </LinearLayout>
 
         <com.twitter.sdk.android.core.identity.TwitterLoginButton
             android:id="@+id/twitter_login_button"
