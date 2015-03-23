@@ -38,8 +38,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
-        setContentView(R.layout.activity_select_network);
+        Fabric.with(this, new Twitter(authConfig));        setContentView(R.layout.activity_select_network);
         Log.d(TAG, "onCreate() called");
 
         ((TextView) findViewById(R.id.link_credit_icons)).setMovementMethod(LinkMovementMethod.getInstance());
@@ -56,45 +55,50 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
         final TwitterSession twitterSession = Twitter.getSessionManager().getActiveSession();
         mLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+        mLoginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                mLoginButton.setVisibility(View.GONE);
+                mLogoutTwitterButton.setVisibility(View.VISIBLE);
+                mShowTweetsButton.setVisibility(View.VISIBLE);
+                Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
+                showTweets(result);
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                Toast.makeText(SelectNetworkActivity.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mShowTweetsButton = (Button) findViewById(R.id.show_tweets_button);
+        mShowTweetsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTweets(new Result<>(twitterSession, null));
+            }
+        });
+
+        mLogoutTwitterButton = (Button) findViewById(R.id.logout_twitter);
+        mLogoutTwitterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Twitter.getSessionManager().clearActiveSession();
+
+                mLoginButton.setVisibility(View.VISIBLE);
+                mLogoutTwitterButton.setVisibility(View.GONE);
+                mShowTweetsButton.setVisibility(View.GONE);
+                Toast.makeText(SelectNetworkActivity.this, R.string.logout_toast, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if (twitterSession != null) {
             mLoginButton.setVisibility(View.GONE);
 
-            mShowTweetsButton = (Button) findViewById(R.id.show_tweets_button);
             mShowTweetsButton.setVisibility(View.VISIBLE);
             mShowTweetsButton.setText("Show " + twitterSession.getUserName() + "'s tweets");
-            mShowTweetsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showTweets(new Result<>(twitterSession, null));
-                }
-            });
 
-            mLogoutTwitterButton = (Button) findViewById(R.id.logout_twitter);
             mLogoutTwitterButton.setVisibility(View.VISIBLE);
-            mLogoutTwitterButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Twitter.logOut();
-                    mLoginButton.setVisibility(View.VISIBLE);
-                    mLogoutTwitterButton.setVisibility(View.GONE);
-                    mShowTweetsButton.setVisibility(View.GONE);
-                    Toast.makeText(SelectNetworkActivity.this, R.string.logout_toast, Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            mLoginButton.setCallback(new Callback<TwitterSession>() {
-                @Override
-                public void success(Result<TwitterSession> result) {
-                    Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
-                    showTweets(result);
-                }
-
-                @Override
-                public void failure(TwitterException exception) {
-                    Toast.makeText(SelectNetworkActivity.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
     }
 
