@@ -33,10 +33,10 @@ public class TweetsActivity extends ActionBarActivity {
 
     private LinearLayout mLinearLayout;
     private Calendar mCalendar;
-    private Calendar mDateWanted;
+    public Calendar mDateWanted;
     public static final String USERNAME = "";
     private static final String TAG = "SocialMediaHistory";
-    private long mLastId;
+    private long mLastId,mFirstId;
     private String mUserName;
     private StatusesService statusesService;
     private Toast mToast;
@@ -57,10 +57,12 @@ public class TweetsActivity extends ActionBarActivity {
         getSupportActionBar().setTitle("@" + mUserName + "'s tweets");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4099FF")));
 
-        updateDate(2015, 2, 9);
+        mDateWanted.set(2015, 2, 9);
+        getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
+        loadTweetsFirstTime();
     }
 
-    private void loadTweetsFirstTime() {
+    public void loadTweetsFirstTime() {
         //First time checking for tweets - max_id = null
         statusesService.userTimeline(null, mUserName, null, 200L, null, true, false, false, true, new Callback<List<Tweet>>() {
             @Override
@@ -95,6 +97,7 @@ public class TweetsActivity extends ActionBarActivity {
             mToast = Toast.makeText(TweetsActivity.this, R.string.loading_toast, Toast.LENGTH_SHORT);
             mToast.show();
 
+            mFirstId = listResult.data.get(0).id;
             mLastId = listResult.data.get(listResult.data.size() - 1).id;
 
             for (Tweet tweet : listResult.data) {
@@ -106,7 +109,7 @@ public class TweetsActivity extends ActionBarActivity {
                             @Override
                             public void success(Tweet tweet) {
                                 mLinearLayout.addView(new TweetView(TweetsActivity.this, tweet));
-                                mLinearLayout.getChildAt(mLinearLayout.getChildCount()-1).setPadding(0,0,0,10);
+                                mLinearLayout.getChildAt(mLinearLayout.getChildCount() - 1).setPadding(0, 0, 0, 10);
                             }
 
                             @Override
@@ -133,14 +136,11 @@ public class TweetsActivity extends ActionBarActivity {
         }
     }
 
-    public void updateDate(int year, int month, int day) {
+    public void resetView() {
         mLinearLayout.removeAllViews();
-        mDateWanted.set(year, month, day);
-        getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
         tweetsFound = false;
-        loadTweetsFirstTime();
+        getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -163,11 +163,14 @@ public class TweetsActivity extends ActionBarActivity {
                 break;
             case R.id.action_prev_day:
                 mDateWanted.add(Calendar.DAY_OF_MONTH, -1);
-                updateDate(mDateWanted.get(Calendar.YEAR),mDateWanted.get(Calendar.MONTH),mDateWanted.get(Calendar.DAY_OF_MONTH));
+                resetView();
+                mLastId=mFirstId+1;
+                loadTweetsAfterFirstTime();
                 break;
             case R.id.action_next_day:
-                mDateWanted.add(Calendar.DAY_OF_MONTH,1);
-                updateDate(mDateWanted.get(Calendar.YEAR),mDateWanted.get(Calendar.MONTH),mDateWanted.get(Calendar.DAY_OF_MONTH));
+                mDateWanted.add(Calendar.DAY_OF_MONTH, 1);
+                resetView();
+                loadTweetsFirstTime();
                 break;
             default:
         }

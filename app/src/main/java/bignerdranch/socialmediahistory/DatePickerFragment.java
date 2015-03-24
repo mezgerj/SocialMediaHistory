@@ -27,6 +27,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker v, int year, int month, int date) {
-        ((TweetsActivity)getActivity()).updateDate(year,month,date);
+        ((TweetsActivity)getActivity()).mDateWanted.set(year,month,date);
+        ((TweetsActivity)getActivity()).resetView();
+        ((TweetsActivity)getActivity()).loadTweetsFirstTime();
     }
 }
