@@ -2,116 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.3.2\d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27\picasso-2.3.2.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d6b7f0093cec6c9faf65dbfd6a6a345d0ed25e27">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\picasso-2.3.2-5ce1779aba202a76806dd3f1de36a7a56e378949.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.twitter.sdk.android\twitter-core\1.3.1\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4258a821d937d5064491b0a1e57fc4228d93b7be">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-716fedb3689089b70e06df32e3e8bb4132566398.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.facebook.android\facebook-android-sdk\3.21.1\classes.jar"
+        jar="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/3.21.1/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="0285ad8da812e92dda76ed5d0dcba05724c7911d">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-5306c6767e99296e2ab843ad1241575d9b3aa751.jar" />
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/classes-9b14868fb8c6600372766465813d96ce5189bc8c.jar" />
     </item>
     <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\gson-2.2.4-0459bee83a48043bf3450bff0ed16203363dded8.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.digits.sdk.android\digits\1.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b6d78e6b220579f1e542dc86e217bca45dd573cd">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-4b6a1b0349ca8d206db6bde7ab7e3f918527fd08.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-34b6da3087cf4d6e54175adcf4acc7613373d6d4.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.twitter.cobalt\performance-metrics\0.2.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="39a316349636281051561b9abb23fdd6a2b17061">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-1aa12b42bfeedf5016d49570165d8ef2cef54fe4.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.6.1\efb0a36546aa8857ab8df358b106c1817e03cbee\retrofit-1.6.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="efb0a36546aa8857ab8df358b106c1817e03cbee">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\retrofit-1.6.1-33e61229ef1c615443576d3a1d2dbac8490ff450.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-5c6c5b449a071b77583ce112a637b2853743e74d.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.twitter.sdk.android\tweet-ui\1.0.7\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9590fac4b366ffac8877cf5ba7daa3bd58cd5661">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-177f9ccce4cbd9419f94d86cd424a255ba27a906.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-android\1.1.2\91c20388c9a45f62b5ed8fe0502bb76ff6251fc7\bolts-android-1.1.2.jar"
+        jar="/Users/umang/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.2/91c20388c9a45f62b5ed8fe0502bb76ff6251fc7/bolts-android-1.1.2.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="91c20388c9a45f62b5ed8fe0502bb76ff6251fc7">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\bolts-android-1.1.2-f9653f554e6877a966f9bf295714c4f4cf0a06e3.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-03eb2ac6d7b4172275c3fd17347a1aa223297f31.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.twitter.sdk.android\tweet-composer\0.7.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="69bf5d59b95eb91b9d17ddb3f0725a4ff499197e">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-5d3c4cff746f4baf08ae3e50f401f37b1ec26522.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.2.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="0a4af6a85230b990eb8690b696d2db9247338611">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-ffcaca5f55245cfaebb743e2c1c7157a27e8c89a.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-08128568db8a4a67d0fd88bfd1c295949e4f30f5.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\exploded-aar\com.twitter.sdk.android\twitter\1.3.2\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b556bb43b1b781e5a3f6d164ed8acf86793998be">
-        <dex dex="C:\Users\John\Desktop\SocialMediaHistory\app\build\intermediates\pre-dexed\debug\classes-5c062bceb615cd926272c219a4cce0c4f4390c5e.jar" />
+        <dex dex="/Users/umang/OneDrive/Documents/University/AndroidStudioProjects/SocialMediaHistory/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.2-a74460896d084c5fd448f52f221a8553893faf6b.jar" />
     </item>
 
 </items>
