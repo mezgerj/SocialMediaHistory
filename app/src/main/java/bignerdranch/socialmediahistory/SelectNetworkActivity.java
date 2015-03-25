@@ -21,6 +21,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import io.fabric.sdk.android.Fabric;
 
 
+
 public class SelectNetworkActivity extends ActionBarActivity {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
@@ -49,7 +50,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
         mFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), messageResIdFacebook, Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(v.getContext(), messageResIdFacebook, Toast.LENGTH_SHORT).show();
             }
         });
 
