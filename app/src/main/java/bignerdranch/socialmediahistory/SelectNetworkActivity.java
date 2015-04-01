@@ -15,6 +15,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.RequestAsyncTask;
+import com.facebook.Response;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.android.Facebook;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
@@ -22,6 +31,7 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+import com.facebook.Session;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,10 +48,12 @@ public class SelectNetworkActivity extends ActionBarActivity {
     private static final String TWITTER_SECRET = "BVJZSRztZawjnDyBDfZrmwKvok2RMNOaUDpK6jOlYC2IeTDc97";
     private static Context context;
     private static final String TAG = "SocialMediaHistory";
-    private Button mFacebookButton;
+    private LoginButton mFacebookButton;
+    private View otherView;
+    private UiLifecycleHelper uiHelper;
     private Button mShowTweetsButton;
     private Button mLogoutTwitterButton;
-
+    private TextView mUser;
     private TwitterLoginButton mLoginButton;
 
     public static Context getAppContext() {
@@ -52,6 +64,50 @@ public class SelectNetworkActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_network);
+        otherView = (View) findViewById(R.id.other_views);
+        otherView.setVisibility(View.GONE);
+
+        uiHelper = new UiLifecycleHelper(this, callback);
+        uiHelper.onCreate(savedInstanceState);
+        boolean result = isLoggedIn();
+        Log.d(TAG,"Result is " + result);
+        Session session = Session.getActiveSession();
+        Request.newMeRequest(session,
+                new Request.GraphUserCallback() {
+
+                    // callback after Graph API response with user
+                    // object
+                    @Override
+                    public void onCompleted(GraphUser user,
+                                            Response response) {
+                        // when user is not null
+                        if (user != null) {
+                            Log.d(TAG,"User is " + user.getFirstName());
+
+                        }
+                    }
+                }).executeAsync();
+
+        Bundle params = new Bundle();
+        params.putString("message", "This is a test message");
+/* make the API call */
+        new Request(
+                session,
+                "/{status-id}",
+                params,
+                HttpMethod.POST,
+                new Request.Callback() {
+                    public void onCompleted(Response response) {
+            /* handle the result */
+                    }
+                }
+        ).executeAsync();
+
+
+
+
+
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
@@ -80,14 +136,9 @@ public class SelectNetworkActivity extends ActionBarActivity {
         ((TextView) findViewById(R.id.link_credit_icons)).setMovementMethod(LinkMovementMethod.getInstance());
 
         final int messageResIdFacebook = R.string.facebook_login_toast;
+        mUser = (TextView) findViewById(R.id.user_show);
+        mFacebookButton = (LoginButton) findViewById(R.id.facebook_button);
 
-        mFacebookButton = (Button) findViewById(R.id.facebook_button);
-        mFacebookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), messageResIdFacebook, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         final TwitterSession twitterSession = Twitter.getSessionManager().getActiveSession();
         mLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
@@ -138,16 +189,41 @@ public class SelectNetworkActivity extends ActionBarActivity {
         }
     }
 
+    private Session.StatusCallback callback = new Session.StatusCallback() {
+        @Override
+        public void call(Session session, SessionState state,
+                         Exception exception) {
+            onSessionStateChange(session, state, exception);
+        }
+    };
+
     private void showTweets(Result<TwitterSession> result) {
         Intent i = new Intent(SelectNetworkActivity.this, TweetsActivity.class);
         i.putExtra(TweetsActivity.USERNAME, result.data.getUserName());
         startActivity(i);
     }
 
+    private void onSessionStateChange(Session session, SessionState state,
+                                      Exception exception) {
+        final TextView name = (TextView) findViewById(R.id.name);
+        final TextView gender = (TextView) findViewById(R.id.gender);
+        final TextView location = (TextView) findViewById(R.id.location);
+        // When Session is successfully opened (User logged-in)
+        if (state.isOpened()) {
+            Log.i(TAG, "Logged in...");
+            // make request to the /me API to get Graph user
+        } else if (state.isClosed()) {
+            Log.i(TAG, "Logged out...");
+            otherView.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mLoginButton.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
+        Log.i(TAG, "OnActivityResult...");
     }
 
     @Override
@@ -180,6 +256,10 @@ public class SelectNetworkActivity extends ActionBarActivity {
         Log.d(TAG, "onDestroy called");
     }
 
+    public boolean isLoggedIn() {
+        Session session = Session.getActiveSession();
+        return (session != null && session.isOpened());
+    }
 
 
 
