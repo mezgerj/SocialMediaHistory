@@ -1,9 +1,14 @@
 package bignerdranch.socialmediahistory;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +23,10 @@ import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
 import io.fabric.sdk.android.Fabric;
 
 
@@ -27,7 +36,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "zpNAAiSwBk7JuZRm1b7eqdVNP";
     private static final String TWITTER_SECRET = "BVJZSRztZawjnDyBDfZrmwKvok2RMNOaUDpK6jOlYC2IeTDc97";
-
+    private static Context context;
     private static final String TAG = "SocialMediaHistory";
     private Button mFacebookButton;
     private Button mShowTweetsButton;
@@ -35,9 +44,35 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
     private TwitterLoginButton mLoginButton;
 
+    public static Context getAppContext() {
+        return SelectNetworkActivity.context;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "bignerdranch.socialmediahistory",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
+
+
+        SelectNetworkActivity.context = getApplicationContext();
+
+        SelectNetworkActivity.context = getApplicationContext();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));        setContentView(R.layout.activity_select_network);
         Log.d(TAG, "onCreate() called");
@@ -50,7 +85,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
         mFacebookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Toast.makeText(v.getContext(), messageResIdFacebook, Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), messageResIdFacebook, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,4 +179,8 @@ public class SelectNetworkActivity extends ActionBarActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy called");
     }
+
+
+
+
 }
