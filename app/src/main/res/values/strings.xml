@@ -3,17 +3,18 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="facebook_login_toast">Launching Facebook login...</string>
-    <string name="twitter_login_toast">Launching Twitter login...</string>
     <string name="title_activity_tweets">TweetsActivity</string>
     <string name="action_change_date">Change date</string>
     <string name="login_toast">You\'re now logged in!</string>
     <string name="logout_toast">You\'ve been logged out.</string>
-    <string name="loading_toast">Loading tweets...</string>
     <string name="no_tweets_toast">No tweets found.</string>
     <string name="credit_icons"><a href="http://icons8.com/web-app/5910/Previous">Icons by Icons8</a></string>
     <string name="show_tweets_button">Show tweets</string>
+    <string name="load_tweets_button">Load tweets</string>
     <string name="logout_twitter">Logout of Twitter</string>
     <string name="facebook_app_id">649853081813913</string>
     <string name="facebook_app_secret">c3efa81c44c247134d882fbe960c8a6</string>
     <string name="title_facebook_login">Login</string>
+    <string name="title_activity_load_tweets">LoadTweetsActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

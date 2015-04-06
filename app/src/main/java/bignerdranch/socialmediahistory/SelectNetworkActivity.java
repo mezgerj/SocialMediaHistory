@@ -30,7 +30,6 @@ import java.security.NoSuchAlgorithmException;
 import io.fabric.sdk.android.Fabric;
 
 
-
 public class SelectNetworkActivity extends ActionBarActivity {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
@@ -38,8 +37,8 @@ public class SelectNetworkActivity extends ActionBarActivity {
     private static final String TWITTER_SECRET = "BVJZSRztZawjnDyBDfZrmwKvok2RMNOaUDpK6jOlYC2IeTDc97";
     private static Context context;
     private static final String TAG = "SocialMediaHistory";
-    private Button mFacebookButton;
     private Button mShowTweetsButton;
+    private Button mLoadTweetsButton;
     private Button mLogoutTwitterButton;
 
     private TwitterLoginButton mLoginButton;
@@ -49,7 +48,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
@@ -69,25 +68,13 @@ public class SelectNetworkActivity extends ActionBarActivity {
         }
 
 
-
-        SelectNetworkActivity.context = getApplicationContext();
-
         SelectNetworkActivity.context = getApplicationContext();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));        setContentView(R.layout.activity_select_network);
+        Fabric.with(this, new Twitter(authConfig));
+        setContentView(R.layout.activity_select_network);
         Log.d(TAG, "onCreate() called");
 
         ((TextView) findViewById(R.id.link_credit_icons)).setMovementMethod(LinkMovementMethod.getInstance());
-
-        final int messageResIdFacebook = R.string.facebook_login_toast;
-
-        mFacebookButton = (Button) findViewById(R.id.facebook_button);
-        mFacebookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), messageResIdFacebook, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         final TwitterSession twitterSession = Twitter.getSessionManager().getActiveSession();
         mLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
@@ -97,6 +84,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
                 mLoginButton.setVisibility(View.GONE);
                 mLogoutTwitterButton.setVisibility(View.VISIBLE);
                 mShowTweetsButton.setVisibility(View.VISIBLE);
+                mLoadTweetsButton.setVisibility(View.VISIBLE);
                 Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
                 showTweets(result);
             }
@@ -112,6 +100,16 @@ public class SelectNetworkActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 showTweets(new Result<>(twitterSession, null));
+            }
+        });
+
+        mLoadTweetsButton = (Button) findViewById(R.id.load_tweets_button);
+        mLoadTweetsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SelectNetworkActivity.this, LoadTweetsActivity.class);
+                i.putExtra(TweetsActivity.USERNAME, twitterSession.getUserName());
+                startActivity(i);
             }
         });
 
@@ -133,6 +131,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
             mShowTweetsButton.setVisibility(View.VISIBLE);
             mShowTweetsButton.setText("Show " + twitterSession.getUserName() + "'s tweets");
+            mLoadTweetsButton.setVisibility(View.VISIBLE);
 
             mLogoutTwitterButton.setVisibility(View.VISIBLE);
         }
@@ -141,6 +140,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
     private void showTweets(Result<TwitterSession> result) {
         Intent i = new Intent(SelectNetworkActivity.this, TweetsActivity.class);
         i.putExtra(TweetsActivity.USERNAME, result.data.getUserName());
+
         startActivity(i);
     }
 
@@ -179,8 +179,6 @@ public class SelectNetworkActivity extends ActionBarActivity {
         super.onDestroy();
         Log.d(TAG, "onDestroy called");
     }
-
-
 
 
 }

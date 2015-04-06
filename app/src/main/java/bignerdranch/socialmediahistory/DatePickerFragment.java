@@ -8,16 +8,12 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-/**
- * Created by umang on 3/19/15.
- */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-    private Calendar mCalendar;
     public static final String EXTRA_DATE = "DATE";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        mCalendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
+        Calendar mCalendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
 
         int year = mCalendar.get(Calendar.YEAR);
         int month = mCalendar.get(Calendar.MONTH);
@@ -27,8 +23,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker v, int year, int month, int date) {
-        ((TweetsActivity)getActivity()).mDateWanted.set(year,month,date);
-        ((TweetsActivity)getActivity()).resetView();
-        ((TweetsActivity)getActivity()).loadTweetsFirstTime();
+        ((TweetsActivity) getActivity()).mDateWanted.set(year, month, date);
+        //((TweetsActivity)getActivity()).loadTweetsFirstTime();
+        ((TweetsActivity) getActivity()).showTweets();
     }
 }

@@ -1,31 +1,29 @@
 package bignerdranch.socialmediahistory;
 
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterApiClient;
-import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
-import com.twitter.sdk.android.core.services.StatusesService;
 import com.twitter.sdk.android.tweetui.LoadCallback;
 import com.twitter.sdk.android.tweetui.TweetUtils;
 import com.twitter.sdk.android.tweetui.TweetView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -35,111 +33,83 @@ public class TweetsActivity extends ActionBarActivity {
     private Calendar mCalendar;
     public Calendar mDateWanted;
     public static final String USERNAME = "";
-    private static final String TAG = "SocialMediaHistory";
-    private long mLastId,mFirstId;
-    private String mUserName;
-    private StatusesService statusesService;
-    private Toast mToast;
     private Boolean tweetsFound = false;
+    private ProgressDialog mProgressDialog;
+    private static final String FILENAME = "tweets.json";
+    private JSONArray mArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tweets);
 
-        TwitterApiClient twitterApiClient = TwitterCore.getInstance().getApiClient();
-        statusesService = twitterApiClient.getStatusesService();
-
         mLinearLayout = (LinearLayout) findViewById(R.id.tweet_layout);
         mCalendar = Calendar.getInstance();
         mDateWanted = Calendar.getInstance();
-        mUserName = getIntent().getStringExtra(USERNAME);
-        getSupportActionBar().setTitle("@" + mUserName + "'s tweets");
+        String userName = getIntent().getStringExtra(USERNAME);
+        getSupportActionBar().setTitle("@" + userName + "'s tweets");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4099FF")));
 
-        mDateWanted.set(2015, 2, 9);
+        mDateWanted.set(2015, 2, 31);
         getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
-        loadTweetsFirstTime();
+
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Getting ready...");
+        mProgressDialog.isIndeterminate();
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.show();
+
+        TweetsJSONSerializer serializer = new TweetsJSONSerializer(getApplicationContext(), FILENAME);
+        try {
+            mArray = serializer.loadTweetIds();
+
+            mProgressDialog.setMessage("Loading tweets...");
+            showTweets();
+        } catch (IOException e) {
+            Toast.makeText(TweetsActivity.this, "No tweets have been loaded!", Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            Toast.makeText(TweetsActivity.this, "Error: " + e, Toast.LENGTH_LONG).show();
+        } finally{
+            mProgressDialog.dismiss();
+        }
     }
 
-    public void loadTweetsFirstTime() {
-        //First time checking for tweets - max_id = null
-        statusesService.userTimeline(null, mUserName, null, 200L, null, true, false, false, true, new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> listResult) {
-                goThroughTweets(listResult);
-            }
-
-            @Override
-            public void failure(TwitterException e) {
-
-            }
-        });
-    }
-
-    private void loadTweetsAfterFirstTime() {
-        statusesService.userTimeline(null, mUserName, null, 200L, mLastId - 1, true, false, false, true, new Callback<List<Tweet>>() {
-            @Override
-            public void success(Result<List<Tweet>> listResult) {
-                goThroughTweets(listResult);
-            }
-
-            @Override
-            public void failure(TwitterException e) {
-
-            }
-        });
-    }
-
-    private void goThroughTweets(Result<List<Tweet>> listResult) {
-        if (listResult.data.size() > 0) {
-            if (mToast != null) mToast.cancel();
-            mToast = Toast.makeText(TweetsActivity.this, R.string.loading_toast, Toast.LENGTH_SHORT);
-            mToast.show();
-
-            mFirstId = listResult.data.get(0).id;
-            mLastId = listResult.data.get(listResult.data.size() - 1).id;
-
-            for (Tweet tweet : listResult.data) {
-                try {
-                    mCalendar.setTime(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US).parse(tweet.createdAt));
-                    if (mCalendar.get(Calendar.YEAR) == mDateWanted.get(Calendar.YEAR) && mCalendar.get(Calendar.MONTH) == mDateWanted.get(Calendar.MONTH) && mCalendar.get(Calendar.DAY_OF_MONTH) == mDateWanted.get(Calendar.DAY_OF_MONTH)) {
-                        tweetsFound = true;
-                        TweetUtils.loadTweet(tweet.id, new LoadCallback<Tweet>() {
-                            @Override
-                            public void success(Tweet tweet) {
-                                mLinearLayout.addView(new TweetView(TweetsActivity.this, tweet));
-                                mLinearLayout.getChildAt(mLinearLayout.getChildCount() - 1).setPadding(0, 0, 0, 10);
-                            }
-
-                            @Override
-                            public void failure(TwitterException e) {
-
-                            }
-                        });
-                    } else if (mCalendar.getTime().before(mDateWanted.getTime())) {
-                        if (mToast != null) mToast.cancel();
-                        if (!tweetsFound) {
-                            mToast = Toast.makeText(TweetsActivity.this, R.string.no_tweets_toast, Toast.LENGTH_LONG);
-                            mToast.show();
+    public void showTweets() {
+        resetView();
+        try {
+            for (int i = 0; i < mArray.length(); i++) {
+                mCalendar.setTime(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US).parse((String) mArray.getJSONObject(i).get("date")));
+                if (mCalendar.get(Calendar.YEAR) == mDateWanted.get(Calendar.YEAR) && mCalendar.get(Calendar.MONTH) == mDateWanted.get(Calendar.MONTH) && mCalendar.get(Calendar.DAY_OF_MONTH) == mDateWanted.get(Calendar.DAY_OF_MONTH)) {
+                    tweetsFound = true;
+                    TweetUtils.loadTweet((long) mArray.getJSONObject(i).get("id"), new LoadCallback<Tweet>() {
+                        @Override
+                        public void success(Tweet tweet) {
+                            mLinearLayout.addView(new TweetView(TweetsActivity.this, tweet));
+                            mLinearLayout.getChildAt(mLinearLayout.getChildCount() - 1).setPadding(0, 0, 0, 10);
                         }
-                        break;
-                    }
-                } catch (Exception e) {
-                    Log.d(TAG, tweet.createdAt);
+
+                        @Override
+                        public void failure(TwitterException e) {
+
+                        }
+                    });
                 }
             }
-
-            if (mCalendar.getTime().after(mDateWanted.getTime())) {
-                loadTweetsAfterFirstTime();
-            }
+        } catch (Exception e) {
+            Toast.makeText(TweetsActivity.this, "Error showing tweets: " + e, Toast.LENGTH_LONG).show();
         }
+        if (!tweetsFound)
+            Toast.makeText(TweetsActivity.this, R.string.no_tweets_toast, Toast.LENGTH_LONG).show();
+
+        mProgressDialog.dismiss();
     }
 
     public void resetView() {
         mLinearLayout.removeAllViews();
         tweetsFound = false;
         getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
+        mProgressDialog.show();
     }
 
     @Override
@@ -163,14 +133,11 @@ public class TweetsActivity extends ActionBarActivity {
                 break;
             case R.id.action_prev_day:
                 mDateWanted.add(Calendar.DAY_OF_MONTH, -1);
-                resetView();
-                mLastId=mFirstId+1;
-                loadTweetsAfterFirstTime();
+                showTweets();
                 break;
             case R.id.action_next_day:
                 mDateWanted.add(Calendar.DAY_OF_MONTH, 1);
-                resetView();
-                loadTweetsFirstTime();
+                showTweets();
                 break;
             default:
         }

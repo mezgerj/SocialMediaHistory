@@ -38,6 +38,13 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/load_tweets_button"
+                android:id="@+id/load_tweets_button"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/show_tweets_button"
                 android:id="@+id/show_tweets_button"
                 android:visibility="gone"/>

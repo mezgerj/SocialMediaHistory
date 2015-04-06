@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="bignerdranch.socialmediahistory">
+    package="bignerdranch.socialmediahistory" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
+        android:configChanges="orientation|screenSize"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:configChanges="orientation|screenSize">
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-
-
-    <activity
+        <activity
             android:name=".SelectNetworkActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="12de3545fa9dc4872d02165efa573803d2cc21b4"/>
+            android:value="12de3545fa9dc4872d02165efa573803d2cc21b4" />
 
         <activity
             android:name=".TweetsActivity"
-            android:label="@string/title_activity_tweets"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_tweets" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".SelectNetworkActivity"/>
+                android:value=".SelectNetworkActivity" />
         </activity>
-
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_facebook_login" >
+        </activity>
+        <activity
+            android:name=".LoadTweetsActivity"
+            android:label="@string/title_activity_load_tweets"
+            android:parentActivityName=".SelectNetworkActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="bignerdranch.socialmediahistory.SelectNetworkActivity" />
         </activity>
     </application>
 
