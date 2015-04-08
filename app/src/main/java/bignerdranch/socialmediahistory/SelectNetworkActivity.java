@@ -67,7 +67,6 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
         }
 
-
         SelectNetworkActivity.context = getApplicationContext();
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
@@ -100,6 +99,15 @@ public class SelectNetworkActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 showTweets(new Result<>(twitterSession, null));
+            }
+        });
+
+        Button cameraButton = (Button) findViewById(R.id.camera_button);
+        cameraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(SelectNetworkActivity.this, CameraActivity.class);
+                startActivity(i);
             }
         });
 
