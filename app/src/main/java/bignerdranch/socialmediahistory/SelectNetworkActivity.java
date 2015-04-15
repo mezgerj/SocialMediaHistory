@@ -38,8 +38,6 @@ public class SelectNetworkActivity extends ActionBarActivity {
     private static Context context;
     private static final String TAG = "SocialMediaHistory";
     private Button mShowTweetsButton;
-    private Button mLoadTweetsButton;
-    private Button mLogoutTwitterButton;
 
     private TwitterLoginButton mLoginButton;
 
@@ -81,9 +79,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
             @Override
             public void success(Result<TwitterSession> result) {
                 mLoginButton.setVisibility(View.GONE);
-                mLogoutTwitterButton.setVisibility(View.VISIBLE);
                 mShowTweetsButton.setVisibility(View.VISIBLE);
-                mLoadTweetsButton.setVisibility(View.VISIBLE);
                 Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
                 showTweets(result);
             }
@@ -102,46 +98,11 @@ public class SelectNetworkActivity extends ActionBarActivity {
             }
         });
 
-        Button cameraButton = (Button) findViewById(R.id.camera_button);
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(SelectNetworkActivity.this, CameraActivity.class);
-                startActivity(i);
-            }
-        });
-
-        mLoadTweetsButton = (Button) findViewById(R.id.load_tweets_button);
-        mLoadTweetsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(SelectNetworkActivity.this, LoadTweetsActivity.class);
-                i.putExtra(TweetsActivity.USERNAME, twitterSession.getUserName());
-                startActivity(i);
-            }
-        });
-
-        mLogoutTwitterButton = (Button) findViewById(R.id.logout_twitter);
-        mLogoutTwitterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Twitter.getSessionManager().clearActiveSession();
-
-                mLoginButton.setVisibility(View.VISIBLE);
-                mLogoutTwitterButton.setVisibility(View.GONE);
-                mShowTweetsButton.setVisibility(View.GONE);
-                Toast.makeText(SelectNetworkActivity.this, R.string.logout_toast, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         if (twitterSession != null) {
             mLoginButton.setVisibility(View.GONE);
 
             mShowTweetsButton.setVisibility(View.VISIBLE);
-            mShowTweetsButton.setText("Show " + twitterSession.getUserName() + "'s tweets");
-            mLoadTweetsButton.setVisibility(View.VISIBLE);
-
-            mLogoutTwitterButton.setVisibility(View.VISIBLE);
+            mShowTweetsButton.setText("Show @" + twitterSession.getUserName() + "'s tweets");
         }
     }
 

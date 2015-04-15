@@ -20,4 +20,27 @@
         app:showAsAction="ifRoom"
         android:orderInCategory="3"
         android:title=""/>
+    <item
+        android:id="@+id/tweet"
+        android:icon="@android:drawable/ic_menu_upload"
+        android:orderInCategory="4"
+        android:title="@string/tweet"/>
+    <item
+        android:id="@+id/photo_tweet"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:orderInCategory="5"
+        android:title="@string/photo_tweet"/>
+    <item
+        android:id="@+id/load_tweets"
+        android:orderInCategory="6"
+        android:title="@string/load_tweets"/>
+    <item
+        android:id="@+id/delete_loaded_tweets"
+        android:orderInCategory="7"
+        android:title="@string/delete_loaded_tweets"/>
+
+    <item
+        android:id="@+id/logout"
+        android:orderInCategory="8"
+        android:title="@string/logout_twitter"/>
 </menu>

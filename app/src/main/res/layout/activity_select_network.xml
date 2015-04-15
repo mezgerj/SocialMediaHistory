@@ -30,38 +30,20 @@
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"/>
 
-        <LinearLayout
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Camera"
-                android:id="@+id/camera_button"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/load_tweets_button"
-                android:id="@+id/load_tweets_button"
-                android:visibility="gone"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/show_tweets_button"
-                android:id="@+id/show_tweets_button"
-                android:visibility="gone"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/logout_twitter"
-                android:text="@string/logout_twitter"
-                android:visibility="gone"/>
-        </LinearLayout>
+            android:text="@string/show_tweets_button"
+            android:id="@+id/show_tweets_button"
+            android:background="@drawable/tw__login_btn_default"
+            android:textColor="#ffffffff"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
+            android:drawableLeft="@drawable/tw__ic_logo_white"
+            android:drawablePadding="10sp"
+            style="?android:attr/borderlessButtonStyle"
+            android:visibility="gone"
+            />
 
         <com.twitter.sdk.android.core.identity.TwitterLoginButton
             android:id="@+id/twitter_login_button"
