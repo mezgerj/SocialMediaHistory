@@ -35,13 +35,12 @@
             android:layout_height="wrap_content"
             android:text="@string/show_tweets_button"
             android:id="@+id/show_tweets_button"
-            android:background="@drawable/tw__login_btn_default"
+            android:background="@drawable/tw__login_btn"
             android:textColor="#ffffffff"
             android:paddingLeft="10sp"
             android:paddingRight="10sp"
             android:drawableLeft="@drawable/tw__ic_logo_white"
             android:drawablePadding="10sp"
-            style="?android:attr/borderlessButtonStyle"
             android:visibility="gone"
             />
 

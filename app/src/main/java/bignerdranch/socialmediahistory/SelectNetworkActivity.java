@@ -26,7 +26,6 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
 import io.fabric.sdk.android.Fabric;
 
 
@@ -107,6 +106,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
     }
 
     private void showTweets(Result<TwitterSession> result) {
+        Toast.makeText(SelectNetworkActivity.this, "Getting ready...", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(SelectNetworkActivity.this, TweetsActivity.class);
         i.putExtra(TweetsActivity.USERNAME, result.data.getUserName());
 

@@ -121,6 +121,8 @@ public class TweetsActivity extends ActionBarActivity {
                         public void failure(TwitterException e) {
                             if (((TwitterApiException) e).getErrorCode() == 88) {
                                 Toast.makeText(TweetsActivity.this, "Slow down! Twitter limits the rate at which you can access the API. Please try the request again in some time!", Toast.LENGTH_LONG).show();
+                            } else if (((TwitterApiException) e).getErrorCode() == 0) {
+                                Toast.makeText(TweetsActivity.this, "Please check your network connection.", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(TweetsActivity.this, "Error loading tweets from Twitter: " + e, Toast.LENGTH_SHORT).show();
                             }
@@ -259,6 +261,8 @@ public class TweetsActivity extends ActionBarActivity {
                 mLoadingDialog.dismiss();
                 if (((TwitterApiException) e).getErrorCode() == 88) {
                     Toast.makeText(TweetsActivity.this, "Slow down! Twitter limits the rate at which you can access the API. Please try the request again in some time!", Toast.LENGTH_LONG).show();
+                } else if (((TwitterApiException) e).getErrorCode() == 0) {
+                    Toast.makeText(TweetsActivity.this, "Please check your network connection.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(TweetsActivity.this, "Error loading tweets from Twitter: " + e, Toast.LENGTH_SHORT).show();
                 }
@@ -278,6 +282,8 @@ public class TweetsActivity extends ActionBarActivity {
                 mLoadingDialog.dismiss();
                 if (((TwitterApiException) e).getErrorCode() == 88) {
                     Toast.makeText(TweetsActivity.this, "Slow down! Twitter limits the rate at which you can access the API. Please try the request again in some time!", Toast.LENGTH_LONG).show();
+                } else if (((TwitterApiException) e).getErrorCode() == 0) {
+                    Toast.makeText(TweetsActivity.this, "Please check your network connection.", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(TweetsActivity.this, "Error loading tweets from Twitter: " + e, Toast.LENGTH_SHORT).show();
                 }
