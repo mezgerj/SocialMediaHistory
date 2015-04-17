@@ -77,7 +77,7 @@ public class TweetsActivity extends ActionBarActivity {
         getSupportActionBar().setTitle("@" + userName + "'s tweets");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#4099FF")));
 
-        mDateWanted.set(2015, 2, 31);
+        mDateWanted.add(Calendar.YEAR, -1);
         getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(mDateWanted.getTime()));
 
         mProgressDialog = new ProgressDialog(this);
@@ -198,19 +198,19 @@ public class TweetsActivity extends ActionBarActivity {
             case R.id.load_tweets:
                 loadTweets();
                 break;
-            case R.id.delete_loaded_tweets:
-                if (mSerializer.mContext.deleteFile(mSerializer.mFilename)) {
-                    Toast.makeText(TweetsActivity.this, "All loaded tweets were deleted.", Toast.LENGTH_SHORT).show();
-                    mArray = new JSONArray();
-                    showTweets();
-                }
-                break;
             case R.id.logout:
                 Twitter.getSessionManager().clearActiveSession();
                 Toast.makeText(TweetsActivity.this, R.string.logout_toast, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(TweetsActivity.this, SelectNetworkActivity.class));
-                break;
+            case R.id.delete_loaded_tweets:
+                if (mSerializer.mContext.deleteFile(mSerializer.mFilename)) {
+                    Toast.makeText(TweetsActivity.this, "All loaded tweets were deleted.", Toast.LENGTH_SHORT).show();
+                    mArray = new JSONArray();
+                    resetView();
+                    mProgressDialog.dismiss();
+                }
             default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -220,7 +220,6 @@ public class TweetsActivity extends ActionBarActivity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putString(KEY_INDEX, mCurrentPhotoPath);
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -248,6 +247,8 @@ public class TweetsActivity extends ActionBarActivity {
         mLoadingDialog = new ProgressDialog(this);
         mLoadingDialog.isIndeterminate();
         mLoadingDialog.setTitle("Loading tweets...");
+        mLoadingDialog.setCancelable(false);
+        mLoadingDialog.setCanceledOnTouchOutside(false);
         mLoadingDialog.show();
 
         statusesService.userTimeline(null, mUserName, null, 200L, null, true, false, false, true, new Callback<List<Tweet>>() {
@@ -299,7 +300,6 @@ public class TweetsActivity extends ActionBarActivity {
 
                 mLastId = listResult.data.get(listResult.data.size() - 1).id;
                 mLoadingDialog.setMessage(mSerializer.mArray.length() + " tweets have been loaded!");
-                mLoadingDialog.show();
                 loadMoreTweets();
             } else {
                 mSerializer.writeTweetsIds();
