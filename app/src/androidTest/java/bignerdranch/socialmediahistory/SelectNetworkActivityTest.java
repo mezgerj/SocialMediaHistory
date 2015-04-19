@@ -21,13 +21,25 @@ public class SelectNetworkActivityTest extends ActivityInstrumentationTestCase2<
     }
 
     public void testIfTweetsAreDeleted() throws Exception {
-        solo.clickOnText("Show @umangs94's tweets");
+        solo.clickOnView(solo.getView(R.id.show_tweets_button));
         solo.waitForActivity(TweetsActivity.class);
-        solo.waitForDialogToClose();
-        solo.clickOnActionBarItem(R.id.delete_loaded_tweets);
+        solo.waitForDialogToClose(45000);
 
         TweetsJSONSerializer mSerializer = new TweetsJSONSerializer(getActivity().getApplicationContext(), "tweets.json");
-        assertFalse(mSerializer.mContext.getFileStreamPath("tweets.json").exists());
+        if (!mSerializer.mContext.getFileStreamPath(mSerializer.mFilename).exists()) {
+            mSerializer.writeTweetsIds();
+        }
+
+        solo.sleep(3000);
+
+        solo.sendKey(Solo.MENU);
+        solo.waitForText("Delete loaded tweets");
+        solo.clickOnText("Delete loaded tweets");
+        solo.sleep(3000);
+
+        assertFalse(mSerializer.mContext.getFileStreamPath(mSerializer.mFilename).exists());
+
+
     }
 
     public void testForWhenNoTweetsExist() throws Exception {
