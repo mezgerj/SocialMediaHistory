@@ -13,6 +13,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        //set up the DatePicker fragment with current dates
         Calendar mCalendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
 
         int year = mCalendar.get(Calendar.YEAR);
@@ -23,6 +24,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker v, int year, int month, int date) {
+        //return to Activity with new date
         ((TweetsActivity) getActivity()).mDateWanted.set(year, month, date);
         ((TweetsActivity) getActivity()).showTweets();
     }

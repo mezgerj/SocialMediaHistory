@@ -33,6 +33,7 @@ public class TweetsJSONSerializer {
     private static final String TAG = "SocialMediaHistory";
 
     public TweetsJSONSerializer(Context c, String f) {
+        //set up JSON file input/output
         mContext = c;
         mFilename = f;
         mCalendar = Calendar.getInstance();
@@ -40,18 +41,21 @@ public class TweetsJSONSerializer {
     }
 
     public JSONObject toJSON(Tweet tweet) throws JSONException {
+        //convert tweet metadata to JSON
         JSONObject json = new JSONObject();
         try {
             mCalendar.setTime(new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US).parse(tweet.createdAt));
         } catch (ParseException e) {
             Log.d(TAG, tweet.createdAt);
         }
+        //save tweet's time in JSONArray
         json.put("date", mCalendar.getTime());
         json.put("id", tweet.id);
         return json;
     }
 
     public void writeTweetsIds() throws IOException {
+        //write JSONArray to file
         Writer writer = null;
         try {
             OutputStream out = mContext.openFileOutput(mFilename, Context.MODE_PRIVATE);
@@ -63,6 +67,7 @@ public class TweetsJSONSerializer {
     }
 
     public JSONArray loadTweetIds() throws IOException, JSONException {
+        //load JSONArray from file
         BufferedReader reader = null;
         JSONArray array = null;
         try {

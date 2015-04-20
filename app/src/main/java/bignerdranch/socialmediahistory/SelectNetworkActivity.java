@@ -65,6 +65,7 @@ public class SelectNetworkActivity extends ActionBarActivity {
         }
 
         SelectNetworkActivity.context = getApplicationContext();
+        //TwitterAPI configuration
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_select_network);
@@ -72,11 +73,13 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
         ((TextView) findViewById(R.id.link_credit_icons)).setMovementMethod(LinkMovementMethod.getInstance());
 
+        //set up Twitter LoginButton
         final TwitterSession twitterSession = Twitter.getSessionManager().getActiveSession();
         mLoginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
         mLoginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
+                //upon successful login, hide LoginButton, show ShowTweetsButton, and run showTweets
                 mLoginButton.setVisibility(View.GONE);
                 mShowTweetsButton.setVisibility(View.VISIBLE);
                 Toast.makeText(SelectNetworkActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
@@ -85,10 +88,12 @@ public class SelectNetworkActivity extends ActionBarActivity {
 
             @Override
             public void failure(TwitterException exception) {
+                //display failure toast
                 Toast.makeText(SelectNetworkActivity.this, "Failed to log in!", Toast.LENGTH_SHORT).show();
             }
         });
 
+        //create new TwitterResult and run ShowTweets
         mShowTweetsButton = (Button) findViewById(R.id.show_tweets_button);
         mShowTweetsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +110,11 @@ public class SelectNetworkActivity extends ActionBarActivity {
         }
     }
 
+    //create Intent for launching TweetsActivity
     private void showTweets(Result<TwitterSession> result) {
         Toast.makeText(SelectNetworkActivity.this, "Getting ready...", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(SelectNetworkActivity.this, TweetsActivity.class);
+        //pass username
         i.putExtra(TweetsActivity.USERNAME, result.data.getUserName());
 
         startActivity(i);
